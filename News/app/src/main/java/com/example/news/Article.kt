@@ -1,5 +1,7 @@
 package com.example.news
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class Response(
@@ -15,7 +17,9 @@ data class Article(
     val description: String,
     val urlToImage: String,
     @SerializedName("publishedAt") val date: String,
+    val url: String,
 )
+
 
 data class Source(
     val id: String,

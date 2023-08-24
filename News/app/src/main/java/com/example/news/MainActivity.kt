@@ -1,5 +1,7 @@
 package com.example.news
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -25,7 +27,14 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.rvArticles)
 
         val articles = mutableListOf<Article>()
-        val adapter = NewsAdapter(this, articles)
+        val adapter = NewsAdapter(this, articles, object : NewsAdapter.ButtonClickListener{
+            override fun onButtonClicked(position: Int) {
+                val article = articles[position]
+                Log.i(TAG, "Opening URL: ${article.url}")
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
+                startActivity(intent)
+            }
+        })
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
